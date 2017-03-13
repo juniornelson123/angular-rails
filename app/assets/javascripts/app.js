@@ -1,1 +1,0 @@
-angular.module("news",["ngRoute", "ngResource"])

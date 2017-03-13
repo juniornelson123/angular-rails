@@ -1,0 +1,21 @@
+{
+  "name": "consultor",
+  "version": "0.0.0",
+  "authors": [
+    "juniornelson123 <juniornelson123@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.6.3",
+    "angular-route": "~1.6.3",
+    "angular-resource": "~1.6.3",
+    "bootstrap": "~3.3.7"
+  }
+}
