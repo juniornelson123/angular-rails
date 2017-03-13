@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :clients
   resources :products
   namespace :api do
   	post 'sessions/signin' => 'sessions#sign_in'
