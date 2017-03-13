@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  status: one
+  payment_date: 2017-03-13 14:38:03
+  code: MyString
+  value: 1.5
+
+two:
+  user: two
+  status: two
+  payment_date: 2017-03-13 14:38:03
+  code: MyString
+  value: 1.5

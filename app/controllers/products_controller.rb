@@ -1,16 +1,16 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
-  before_action :authenticate, only: [:index,:create,:update,:show]
+  before_action :authenticate, only: [:index,:destroy,:create,:update,:show]
   # GET /products
   def index
     @products = Product.all
 
-    render json: @products
+    render json: @products, include: @products.includes
   end
 
   # GET /products/1
   def show
-    render json: @product
+    render json: @product, include: @product.includes
   end
 
   # POST /products
@@ -18,8 +18,8 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render json: @product, status: :created, location: @product
-    else
+      render status: 200, json: @product, include: @product.includes
+    else 
       render json: @product.errors, status: :unprocessable_entity
     end
   end
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   def update
     if @product.update(product_params)
-      render json: @product
+     render status: 200, json: @product, include: @product.includes
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -35,7 +35,12 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   def destroy
-    @product.destroy
+    @product.status = 4
+    if @product.update
+     render status: 200, json: @product, include: @product.includes
+    else
+      render json: @product.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -46,6 +51,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:title, :description)
+      params.require(:product).permit!
     end
 end

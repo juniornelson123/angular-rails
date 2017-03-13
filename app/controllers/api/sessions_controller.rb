@@ -1,5 +1,5 @@
 class Api::SessionsController < ApplicationController
-
+	before_action :authenticate, only: [:sign_out]
 	def sign_in
 		puts "***************|Login|*******************"
 		
@@ -11,11 +11,7 @@ class Api::SessionsController < ApplicationController
       @user.update_column(:token, SecureRandom.uuid)
       warden.set_user @user
 
-      render json: {
-      	data: @user,
-      	success: true,
-        info: "Usuario logado"
-    	}
+      render :status => 200, json: @user, include: @user.includes
 			
       
 
@@ -35,12 +31,7 @@ class Api::SessionsController < ApplicationController
 		@user = User.new(params[:user])
 
 		if @user.save
-			render :status => 200, json: {
-      		success: true,
-      		info: "Usuario cadastrado",
-      		data: @user
-	
-				}
+			render :status => 200, json: @user, include: @user.includes
 			
 		else
 			render :status => 401, json: {
@@ -57,7 +48,7 @@ class Api::SessionsController < ApplicationController
 		@user.update_column(:token, nil)
 		warden.set_user @user
 
-		render json: {
+		render :status => 200, json: {
 			info: "Logout efetuado com sucesso",
 			success: true,
 			data: {}

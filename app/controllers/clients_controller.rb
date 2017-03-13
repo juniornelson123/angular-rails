@@ -1,16 +1,16 @@
-class ClientsController < ApplicationController
+class clientsController < ApplicationController
   before_action :set_client, only: [:show, :update, :destroy]
-
+  before_action :authenticate, only: [:index,:destroy,:create,:update,:show]
   # GET /clients
   def index
     @clients = Client.all
 
-    render json: @clients
+    render json: @clients, include: @clients.includes
   end
 
   # GET /clients/1
   def show
-    render json: @client
+    render json: @client, include: @client.includes
   end
 
   # POST /clients
@@ -18,8 +18,8 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
 
     if @client.save
-      render json: @client, status: :created, location: @client
-    else
+      render status: 200, json: @client, include: @client.includes
+    else 
       render json: @client.errors, status: :unprocessable_entity
     end
   end
@@ -27,7 +27,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   def update
     if @client.update(client_params)
-      render json: @client
+     render status: 200, json: @client, include: @client.includes
     else
       render json: @client.errors, status: :unprocessable_entity
     end
@@ -35,7 +35,12 @@ class ClientsController < ApplicationController
 
   # DELETE /clients/1
   def destroy
-    @client.destroy
+    @client.status = 4
+    if @client.update
+     render status: 200, json: @client, include: @client.includes
+    else
+      render json: @client.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -46,6 +51,6 @@ class ClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_params
-      params.require(:client).permit(:name, :fone, :user_id)
+      params.require(:client).permit!
     end
 end
