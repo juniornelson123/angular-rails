@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	has_many :products
 	has_many :clients
+	belong_to :status
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
