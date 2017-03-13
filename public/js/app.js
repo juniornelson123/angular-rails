@@ -1,1 +1,1 @@
-angular.module("consultor",["ngRoute", "ngResource"])
+angular.module("consultor",["ngRoute", "ngResource", "Devise"])
