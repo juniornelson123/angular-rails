@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
-  before_filter :authenticate_user!, only: [:index,:show,:create, :upvote]
-
+  before_action :authenticate, only: [:index,:create,:update,:show]
   # GET /products
   def index
     @products = Product.all
