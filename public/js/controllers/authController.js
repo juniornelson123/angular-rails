@@ -1,40 +1,37 @@
-angular.module("consultor").controller('authController',function($scope, $location, Auth){
-    Auth.currentUser().then(function (){
+angular.module("consultor").controller('authController',function($rootScope, $scope, $location, sessionService, session){
+/*    Auth.currentUser().then(function (){
 	      $location.path('/');
           
     })
-   var config = {
-        headers: {
-            'X-HTTP-Method-Override': 'POST'
-        }
-    };
-	$scope.$on('devise:new-registration', function (e, user){
-		console.log("novo registro")
-		$scope.user = user;
-	});
-
-	$scope.$on('devise:login', function (e, user){
-	
-		
-		$scope.user = user;
-	});
-
-	$scope.$on('devise:logout', function (e, user){
-		$scope.user = {};
-	});
+*/
 
 	$scope.login = function() {
-    	Auth.login($scope.user, config).then(function(user){
+    	sessionService.login({user: $scope.user}).then(function(user){
 	      console.log(user)
-	      $location.path('/');
-			$scope.signedIn = Auth.isAuthenticated;
-			$scope.user = Auth.current_user
+	      if (user.status == 200) {
+	      		$rootScope.$broadcast("session:login", user.data)
+	      		console.log("criando sessão");
+	      		session.create(user.data)
+	      		$location.path("/")
+
+	      	}else{
+	      		console.log("Usuario ou senha não existem")
+	      }
+	      //$location.path('/');
+			  //$scope.setCurrentUser(user);
+    
+			//$scope.signedIn = Auth.isAuthenticated;
+		//	$scope.user = Auth.current_user
+	    }, function(erro){
+	    	console.log(erro)
 	    });
 	};
 
 	$scope.register = function() {
-		Auth.register($scope.user).then(function(){
-	      $location.path('/');
+		sessionService.register({user: $scope.user}).then(function(user){
+	      console.log(user)
+		}, function(erro){
+			console.log(erro)
 		});
 	};
 })

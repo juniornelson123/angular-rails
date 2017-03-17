@@ -19,7 +19,7 @@ class Api::SessionsController < ApplicationController
       puts "***************|user error|*******************"
       render :status => 401, json: {
           success: false,
-          info: "",
+          info: "Usuario ou senha não existem",
           data: {}
       }
     end

@@ -1,22 +1,24 @@
-angular.module("consultor").controller('navController', function($scope, Auth){
-	$scope.signedIn = Auth.isAuthenticated;
-  	$scope.logout = Auth.logout;
+angular.module("consultor").controller('navController', function($scope, sessionService, session){
+	console.log(sessionService.isAuthenticated())
+	$scope.signedIn = sessionService.isAuthenticated();
+  	
+  	if ($scope.signedIn) {
+  		console.log(session.currentUser())
 
-  	Auth.currentUser().then(function (user){
-    	$scope.user = user;
-  	});
-
-	$scope.$on('devise:new-registration', function (e, user){
-		console.log("novo registro")
+  		$scope.user = session.currentUser();
+  	}else{
+  		$scope.user = null
+  	}
+  	
+	$scope.$on('session:login', function (e, user){
+		console.log("novo login")
+		console.log(user)
 		$scope.user = user;
+		$scope.signedIn = sessionService.isAuthenticated();
 	});
 
-	$scope.$on('devise:login', function (e, user){
-		$scope.user = user;
-			console.log("login na nav")
-	});
+	$scope.logout = function(){
+		session.destroy()
+	}
 
-	$scope.$on('devise:logout', function (e, user){
-		$scope.user = {};
-	});
 })
