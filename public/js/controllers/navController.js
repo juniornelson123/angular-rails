@@ -21,4 +21,6 @@ angular.module("consultor").controller('navController', function($scope, session
 		session.destroy()
 	}
 
+	
+
 })

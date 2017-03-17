@@ -1,9 +1,9 @@
 angular.module("consultor").config(function($routeProvider) {
-	$routeProvider.when("/",{
+	$routeProvider.when("/home",{
 		templateUrl: "views/index.html"
 	})
 
-	$routeProvider.when('/login', {
+	$routeProvider.when('/login',  {
       templateUrl: 'views/login.html',
       controller: 'authController'
     })
@@ -12,4 +12,6 @@ angular.module("consultor").config(function($routeProvider) {
       templateUrl: 'views/register.html',
       controller: 'authController'
     });		
+
+
 })
