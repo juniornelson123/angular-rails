@@ -13,5 +13,7 @@ angular.module("consultor").config(function($routeProvider) {
       controller: 'authController'
     });		
 
+    $routeProvider.otherwise('/login')
 
+   
 })
