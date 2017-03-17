@@ -1,7 +1,8 @@
-angular.module("consultor").controller('navController', function($scope, sessionService, session){
+angular.module("consultor").controller('navController', function($scope, sessionService, session, $location){
 	console.log(sessionService.isAuthenticated())
-	$scope.signedIn = sessionService.isAuthenticated();
-  	
+	$scope.signedIn = function(){
+		return sessionService.isAuthenticated();
+  }
   	if ($scope.signedIn) {
   		console.log(session.currentUser())
 
@@ -14,11 +15,12 @@ angular.module("consultor").controller('navController', function($scope, session
 		console.log("novo login")
 		console.log(user)
 		$scope.user = user;
-		$scope.signedIn = sessionService.isAuthenticated();
+		//$scope.signedIn();
 	});
 
 	$scope.logout = function(){
 		session.destroy()
+		$location.path("/login")
 	}
 
 	

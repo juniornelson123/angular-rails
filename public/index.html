@@ -21,7 +21,7 @@
 
   <section id="container" >
   	<span ng-controller="navController">
-	<header class="header black-bg" ng-show="signedIn">
+	<header class="header black-bg" ng-show="signedIn()">
               <div class="sidebar-toggle-box">
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
@@ -175,7 +175,7 @@
             </div>
         </header>
       <!--header end-->
-     <aside ng-show="signedIn">
+     <aside ng-show="signedIn()">
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
