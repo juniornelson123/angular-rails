@@ -15,9 +15,9 @@ angular.module("consultor").factory('sessionService', function($http, session){
 	     
 	};
 
-	authService.delete = function (credentials) {
+	authService.delete = function (id) {
 	    return $http
-	      .delete(baseUrl+'/sessions/signout.json',{headers: {'token': currentUser.token}}, credentials)
+	      .delete(baseUrl+'/sessions/signout/'+id+'.json',{headers: {'token': currentUser.token}})
 	      
 	};
 

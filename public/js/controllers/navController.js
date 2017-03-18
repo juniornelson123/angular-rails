@@ -3,18 +3,18 @@ angular.module("consultor").controller('navController', function($scope, session
 	$scope.signedIn = function(){
 		return sessionService.isAuthenticated();
   }
-  	if ($scope.signedIn) {
-  		console.log(session.currentUser())
-
+  	if ($scope.signedIn()) {
+  	
   		$scope.user = session.currentUser();
+  		console.log($scope.user.token)
   	}else{
   		$scope.user = null
   	}
   	
 	$scope.$on('session:login', function (e, user){
-		console.log("novo login")
-		console.log(user)
 		$scope.user = user;
+  		console.log($scope.user.token)
+
 		//$scope.signedIn();
 	});
 

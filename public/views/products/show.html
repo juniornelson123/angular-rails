@@ -42,8 +42,8 @@
 			<br>	
 			<div>
 				<a class="btn btn-default" href="/#!/produtos">Voltar</a>
-				<button class="btn btn-primary">Editar</button>
-				<button class="btn btn-danger">Deletar</button>
+				<a class="btn btn-primary" href="/#!/produtos/{{product.id}}/edit">Editar</a>
+				<button class="btn btn-danger" ng-click="destroy(product.id)">Deletar</button>
 			</div>
 		</div>
 	</div><!-- col-lg-12-->      	

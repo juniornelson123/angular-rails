@@ -10,8 +10,8 @@ angular.module("consultor").controller('authController',function($rootScope, $sc
 	      console.log(user)
 	      if (user.status == 200) {
 	      		$rootScope.$broadcast("session:login", user.data)
-	      		console.log("criando sessão");
 	      		session.create(user.data)
+	      		console.log(user.data.token)
 	      		$location.path("/")
 
 	      	}else{

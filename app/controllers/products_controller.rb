@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :authenticate, only: [:index,:destroy,:create,:update,:show]
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.active
 
     render json: @products, include: ['status', 'user', 'cart_items']
   end
@@ -16,8 +16,8 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.new(product_params)
-
-    if @product.save
+    @product.status_id = 1
+    if @product.save!
       render status: 200, json: @product, include: ['status', 'user', 'cart_items']
     else 
       render json: @product.errors, status: :unprocessable_entity
@@ -35,8 +35,8 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   def destroy
-    @product.status = 4
-    if @product.update
+    @product.status_id = 4
+    if @product.save!
      render status: 200, json: @product, include: ['status', 'user', 'cart_items']
     else
       render json: @product.errors, status: :unprocessable_entity

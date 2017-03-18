@@ -2,7 +2,9 @@ angular.module("consultor").service('session', function($cookieStore){
 	
 	this.create = function (currentUser) {
 		$cookieStore.put('user', currentUser );
-	    console.log("sessao criada")
+	    
+	    console.log(currentUser.token)
+
 	};
 
 	this.signed = function(){
@@ -13,7 +15,8 @@ angular.module("consultor").service('session', function($cookieStore){
 		return $cookieStore.get('user')
 	}
 
-	this.destroy = function () {
-		$cookieStore.remove('user')
+	this.destroy = function (id) {
+			$cookieStore.remove('user')
+		
 	};	
 })
