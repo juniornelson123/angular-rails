@@ -1,0 +1,35 @@
+
+<section class="wrapper site-min-height">
+	<div class="row">
+		<div  ng-repeat="product in products">
+			<div class="col-lg-4 col-md-4 col-sm-4 mb">
+				<div class="content-panel pn">
+					<div id="profile-01" ng-style="{'background-image':'url(http://localhost:3000/images/profile-02.jpg)'}">
+						<h3>{{product.title}}</h3>
+						<h6>{{product.description}}</h6>
+					</div>
+					<a href="/#!/produtos/{{product.id}}"><div class="profile-01 centered">
+						<p>Detalhes</p>
+					</div></a>
+
+					<div class="profile-01 centered">
+						<p>Deletar</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">					
+			<div class="content-panel pn" >
+				<div id="profile-02" ng-style="{'background-image':'url(http://localhost:3000/images/adicionar1.jpg)'}">
+					
+				</div>
+				<a href="/#!/produtos/new"><div class="profile-01 centered">
+					<p>Adicionar Novo Produto</p>
+				</div></a>
+			</div>  
+		</div>
+	</div>
+	</div>
+
+</section>
+

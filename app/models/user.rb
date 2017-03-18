@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  mount_base64_uploader :avatar, ImageUploader
 
   enum role: { admin: 1, costumer: 2 }
 

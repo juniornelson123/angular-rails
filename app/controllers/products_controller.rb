@@ -5,12 +5,12 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
 
-    render json: @products, include: @products.includes
+    render json: @products, include: ['status', 'user', 'cart_items']
   end
 
   # GET /products/1
   def show
-    render json: @product, include: @product.includes
+    render json: @product, include: ['status', 'user', 'cart_items']
   end
 
   # POST /products
@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render status: 200, json: @product, include: @product.includes
+      render status: 200, json: @product, include: ['status', 'user', 'cart_items']
     else 
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   def update
     if @product.update(product_params)
-     render status: 200, json: @product, include: @product.includes
+     render status: 200, json: @product, include: ['status', 'user', 'cart_items']
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.status = 4
     if @product.update
-     render status: 200, json: @product, include: @product.includes
+     render status: 200, json: @product, include: ['status', 'user', 'cart_items']
     else
       render json: @product.errors, status: :unprocessable_entity
     end
