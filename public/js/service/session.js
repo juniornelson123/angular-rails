@@ -19,4 +19,9 @@ angular.module("consultor").service('session', function($cookieStore){
 			$cookieStore.remove('user')
 		
 	};	
+
+	this.isAuthenticated = function () {
+  		var user = this.currentUser()
+  		return !!user
+	};
 })

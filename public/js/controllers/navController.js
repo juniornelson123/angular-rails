@@ -1,8 +1,8 @@
-angular.module("consultor").controller('navController', function($scope, sessionService, session, $location){
-	console.log(sessionService.isAuthenticated())
+angular.module("consultor").controller('navController', function($scope,$rootScope, sessionService, session, $location){
+	//$rootScope.loadingGif = true
 	$scope.signedIn = function(){
 		return sessionService.isAuthenticated();
-  }
+  	}
   	if ($scope.signedIn()) {
   	
   		$scope.user = session.currentUser();
